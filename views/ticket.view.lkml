@@ -1,0 +1,162 @@
+view: ticket {
+  sql_table_name: "TICKET" ;;
+  drill_fields: [ticket_id]
+
+  dimension: ticket_id {
+    primary_key: yes
+    type: string
+    sql: ${TABLE}."TICKET_ID" ;;
+    html: <a href=https://@{domain}/agent/tickets/{{ value }} target="_blank"><font color="blue">{{ value }}</font></a> ;;
+  }
+
+  dimension: channel {
+    type: string
+    sql: ${TABLE}."CHANNEL" ;;
+  }
+
+  dimension: priority {
+    type: string
+    sql: ${TABLE}."PRIORITY" ;;
+  }
+
+  dimension_group: created {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."CREATED_DATE" ;;
+  }
+
+  dimension: days_open_dimension {
+    type: number
+    sql: datediff(day,${created_date},current_date()) ;;
+  }
+
+  dimension: tickets_aging {
+    case: {
+      when: {
+        label: "30 or more"
+        sql: ${days_open_dimension}>30 ;;
+      }
+      when: {
+        label: "15 - 30"
+        sql: ${days_open_dimension}<=30 AND ${days_open_dimension} > 14 ;;
+      }
+      when: {
+        label: "8 - 14"
+        sql: ${days_open_dimension}<=14 AND ${days_open_dimension} > 7 ;;
+      }
+      when: {
+        label: "2 - 7"
+        sql: ${days_open_dimension}<=7 AND ${days_open_dimension} > 1 ;;
+      }
+      else: "1 or less"
+    }
+  }
+
+  dimension: customer_id {
+    type: string
+    # hidden: yes
+    sql: ${TABLE}."CUSTOMER_ID" ;;
+  }
+
+  dimension: employee_id {
+    type: string
+    # hidden: yes
+    sql: ${TABLE}."EMPLOYEE_ID" ;;
+  }
+
+  dimension: first_reply_time_business_m_dimension {
+    hidden: yes
+    type: number
+    sql: ${TABLE}."FIRST_REPLY_TIME_BUSINESS_M" ;;
+  }
+
+  dimension: first_reply_time_total_m_dimension {
+    hidden: yes
+    type: number
+    sql: ${TABLE}."FIRST_REPLY_TIME_TOTAL_M" ;;
+  }
+
+  measure: first_reply_time_average {
+    type: average
+    sql: ${first_reply_time_total_m_dimension} ;;
+    drill_fields: [ticket_list*,first_reply_time_average]
+    description: "First Reply Time in Minutes"
+    value_format: "# ##0 \" Min\""
+  }
+
+  dimension: reopens_dimension {
+    hidden: yes
+    type: number
+    sql: ${TABLE}."REOPENS" ;;
+  }
+
+  dimension: replies_dimension {
+    hidden: yes
+    type: number
+    sql: ${TABLE}."REPLIES" ;;
+  }
+
+  dimension: resolution_time_business_m_dimension {
+    hidden: yes
+    type: number
+    sql: ${TABLE}."RESOLUTION_TIME_BUSINESS_M" ;;
+  }
+
+  dimension: resolution_time_total_m_dimension {
+    hidden: yes
+    type: number
+    sql: ${TABLE}."RESOLUTION_TIME_TOTAL_M" ;;
+  }
+
+  measure: resolution_time_avg_h {
+    label: "Resolution Hrs"
+    type: average
+    sql: ${resolution_time_total_m_dimension}/60 ;;
+    drill_fields: [ticket_list*,resolution_time_avg_h]
+    description: "Resolution Time in Hours"
+    value_format: "# ##0 \" Hrs\""
+    }
+
+  dimension: score {
+    type: string
+    sql: ${TABLE}."SCORE" ;;
+  }
+
+  dimension: status {
+    type: string
+    sql: ${TABLE}."STATUS" ;;
+  }
+
+  dimension: ticket_subject {
+    type: string
+    sql: ${TABLE}."TICKET_SUBJECT" ;;
+  }
+
+  measure: tickets_total {
+    type: count
+    drill_fields: [ticket_list*]
+  }
+
+  measure: tickets_open {
+    type: count
+    filters: {
+      field: status
+      value: "open, new"
+    }
+    drill_fields: [ticket_list*]
+  }
+
+  set: ticket_list {
+    fields: [
+      ticket_id, company.company, customer.customer, ticket_subject,created_date,status
+    ]
+  }
+}
