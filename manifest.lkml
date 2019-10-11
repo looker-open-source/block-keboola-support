@@ -1,6 +1,6 @@
 
 constant: connection {
-  value: "zendesk"
+  value: "keboola_block_zendesk"
 }
 
 # url of your Zendesk domain for ticket links
