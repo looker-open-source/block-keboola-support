@@ -140,6 +140,46 @@ view: ticket {
     sql: ${TABLE}."TICKET_SUBJECT" ;;
   }
 
+  dimension: sla_status {
+    type: string
+    case: {
+      when: {
+        label: "Response Violation"
+        sql: ${first_reply_time_business_m_dimension} > @{sla_response_minutes} ;;
+      }
+      when: {
+        label: "Response Violation"
+        sql: ${status} = 'new' AND timediff(minute,TO_TIME(${TABLE}."CREATED_DATE"),current_time()) > @{sla_response_minutes} ;;
+      }
+      when: {
+        label: "Resolution Violation"
+        sql: ${resolution_time_business_m_dimension}/60 > @{sla_resolution_hours} ;;
+      }
+      when: {
+        label: "Resolution Violation"
+        sql: ${status} NOT IN ('closed','solved','deleted') AND timediff(hour,TO_TIME(${TABLE}."CREATED_DATE"),current_time()) > @{sla_resolution_hours} ;;
+      }
+      else: "OK"
+    }
+    drill_fields: [ticket_list*]
+  }
+
+  dimension: activity_status {
+    type: string
+    case: {
+      when: {
+        label: "Stale"
+        sql: ${status} NOT IN ('closed','solved','deleted') AND timediff(hour,TO_TIME(${TABLE}."LAST_UPDATE"),current_time()) > @{stale_after_hours} ;;
+      }
+      when: {
+        label: "Closed"
+        sql: ${status} IN ('closed','solved','deleted');;
+      }
+      else: "Active"
+    }
+    drill_fields: [ticket_list*]
+  }
+
   measure: tickets_total {
     type: count
     drill_fields: [ticket_list*]
@@ -149,9 +189,18 @@ view: ticket {
     type: count
     filters: {
       field: status
-      value: "open, new"
+      value: "new, open, pending"
     }
     drill_fields: [ticket_list*]
+  }
+
+  measure: tickets_sla_violations {
+    type: count
+    filters: {
+      field: sla_status
+      value: "Response Violation, Resolution Violation"
+    }
+    drill_fields: [ticket_list*,sla_status]
   }
 
   set: ticket_list {
