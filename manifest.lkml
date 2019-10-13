@@ -1,3 +1,5 @@
+# the manifest contains constants to be set according to your needs:
+
 
 constant: connection {
   value: "keboola_block_zendesk"

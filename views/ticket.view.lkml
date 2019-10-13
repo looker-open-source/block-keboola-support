@@ -213,6 +213,41 @@ view: ticket {
     drill_fields: [ticket_list*,sla_status]
   }
 
+  measure: no_of_evaluated_tickets {
+    label: "No. of Evaluated Tickets"
+    type: count
+    filters: {
+      field: score
+      value: "good,bad"
+    }
+    drill_fields: [ticket_list*]
+  }
+
+  measure: no_of_good_evaluations {
+    label: "No. of Good Evaluations"
+    type: count
+    filters: {
+      field: score
+      value: "good"
+    }
+    drill_fields: [ticket_list*]
+  }
+
+  measure: no_of_bad_evaluations {
+    label: "No. of Bad Evaluations"
+    type: number
+    sql: ${no_of_evaluated_tickets}-${no_of_good_evaluations};;
+    value_format: "#."
+    drill_fields: [ticket_list*]
+  }
+
+  measure: good_evaluations_ratio {
+    type: number
+    sql: ${no_of_good_evaluations}/${no_of_evaluated_tickets} ;;
+    value_format: "0%"
+    drill_fields: [ticket_list*]
+  }
+
   set: ticket_list {
     fields: [
       ticket_id, company.company, customer.customer, ticket_subject,created_date,status
