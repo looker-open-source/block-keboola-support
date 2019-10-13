@@ -1,8 +1,9 @@
 view: ticket {
   sql_table_name: "TICKET" ;;
-  drill_fields: [ticket_id]
+  drill_fields: [ticket_list*]
 
   dimension: ticket_id {
+    label: "Ticket ID"
     primary_key: yes
     type: string
     sql: ${TABLE}."TICKET_ID" ;;
@@ -62,13 +63,13 @@ view: ticket {
 
   dimension: customer_id {
     type: string
-    # hidden: yes
+    hidden: yes
     sql: ${TABLE}."CUSTOMER_ID" ;;
   }
 
   dimension: employee_id {
     type: string
-    # hidden: yes
+    hidden: yes
     sql: ${TABLE}."EMPLOYEE_ID" ;;
   }
 

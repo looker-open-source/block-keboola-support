@@ -3,6 +3,7 @@ view: ticket_field {
   drill_fields: [ticket_field_id]
 
   dimension: ticket_field_id {
+    label: "Ticket Field ID"
     primary_key: yes
     type: string
     sql: ${TABLE}."TICKET_FIELD_ID" ;;

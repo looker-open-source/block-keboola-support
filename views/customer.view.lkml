@@ -3,6 +3,7 @@ view: customer {
   drill_fields: [customer_id]
 
   dimension: customer_id {
+    label: "Customer ID"
     primary_key: yes
     type: string
     sql: ${TABLE}."CUSTOMER_ID" ;;
@@ -10,7 +11,7 @@ view: customer {
 
   dimension: company_id {
     type: string
-    # hidden: yes
+    hidden: yes
     sql: ${TABLE}."COMPANY_ID" ;;
   }
 

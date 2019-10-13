@@ -22,7 +22,7 @@ view: ticket_event {
 
   dimension: ticket_id {
     type: string
-    # hidden: yes
+    hidden: yes
     sql: ${TABLE}."TICKET_ID" ;;
   }
 

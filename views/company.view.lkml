@@ -1,8 +1,9 @@
 view: company {
   sql_table_name: "COMPANY" ;;
-  drill_fields: [company_id]
+  drill_fields: [company]
 
   dimension: company_id {
+    label: "Company ID"
     primary_key: yes
     type: string
     sql: ${TABLE}."COMPANY_ID" ;;

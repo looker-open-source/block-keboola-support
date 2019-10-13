@@ -1,8 +1,8 @@
 view: employee {
   sql_table_name: "EMPLOYEE" ;;
-  drill_fields: [employee_id]
 
   dimension: employee_id {
+    label: "Employee ID"
     primary_key: yes
     type: string
     sql: ${TABLE}."EMPLOYEE_ID" ;;
