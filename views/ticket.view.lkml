@@ -192,6 +192,15 @@ view: ticket {
       field: status
       value: "new, open, pending"
     }
+    drill_fields: [ticket_list*,tickets_open]
+  }
+
+  measure: tickets_new {
+    type: count
+    filters: {
+      field: status
+      value: "new"
+    }
     drill_fields: [ticket_list*]
   }
 
