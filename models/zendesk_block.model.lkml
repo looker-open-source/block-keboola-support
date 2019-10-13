@@ -36,8 +36,6 @@ explore: employee_group {
   }
 }
 
-explore: group {}
-
 explore: ticket {
   join: employee {
     type: left_outer
@@ -45,30 +43,16 @@ explore: ticket {
     relationship: many_to_one
   }
 
-  join: customer {
+  join: ticket_field_value {
     type: left_outer
-    sql_on: ${ticket.customer_id} = ${customer.customer_id} ;;
-    relationship: many_to_one
+    sql_on: ${ticket_field_value.ticket_id} = ${ticket.ticket_id} ;;
+    relationship: one_to_many
   }
 
-  join: company {
-    type: left_outer
-    sql_on: ${customer.company_id} = ${company.company_id} ;;
-    relationship: many_to_one
-  }
-}
-
-explore: ticket_event {
-  join: ticket {
+  join: ticket_event {
     type: left_outer
     sql_on: ${ticket_event.ticket_id} = ${ticket.ticket_id} ;;
-    relationship: many_to_one
-  }
-
-  join: employee {
-    type: left_outer
-    sql_on: ${ticket.employee_id} = ${employee.employee_id} ;;
-    relationship: many_to_one
+    relationship: one_to_many
   }
 
   join: customer {
@@ -82,7 +66,4 @@ explore: ticket_event {
     sql_on: ${customer.company_id} = ${company.company_id} ;;
     relationship: many_to_one
   }
-
 }
-
-explore: ticket_field {}
