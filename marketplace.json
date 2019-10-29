@@ -1,0 +1,35 @@
+{
+  "label": "Support Essentials",
+  "category_label": "Models",
+  "branding": {
+    "image_uri": "https://www.keboola.com/data/poweredByKeboola.png",
+    "tagline": "Keboola’s Customer Support Essentials Block brings your customer data seamlessly into Looker to analyze your support system end-to-end, discover possibilities for better customer experiences and integration for your business needs."
+  },
+
+  "constants": {
+    "CONNECTION": {
+      "label": "Connection Name",
+      "value_constraint": "connection"
+    },
+    "SCHEMA_NAME": {
+      "label": "Schema Name"
+    },
+    "CONFIG_PROJECT_NAME": {
+      "label": "Config Project Name"
+    }
+  },
+  "models": [
+    {
+      "name": "block-keboola-support",
+      "connection_constant": "CONNECTION"
+    }
+  ],
+  "auxiliary_projects": [
+    {
+      "git_uri": "",
+      "git_ref": "",
+      "label": "Support Essentials Config",
+      "constant_name": "CONFIG_PROJECT_NAME"
+    }
+  ]
+}
