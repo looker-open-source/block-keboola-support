@@ -4,7 +4,7 @@
   elements:
   - title: Ticket Creation and Feedback
     name: Ticket Creation and Feedback
-    model: zendesk_block
+    model: block_keboola_support
     explore: ticket
     type: looker_column
     fields: [ticket.score, ticket.created_month, ticket.tickets_total]
@@ -62,7 +62,7 @@
     height: 6
   - title: Open Tickets
     name: Open Tickets
-    model: zendesk_block
+    model: block_keboola_support
     explore: ticket
     type: single_value
     fields: [ticket.tickets_open]
@@ -107,7 +107,7 @@
     height: 3
   - title: Most recent 20 tickets
     name: Most recent 20 tickets
-    model: zendesk_block
+    model: block_keboola_support
     explore: ticket
     type: table
     fields: [ticket.ticket_id, ticket.created_date, ticket.first_reply_time_average,
@@ -171,7 +171,7 @@
     height: 10
   - title: Total Raised Tickets
     name: Total Raised Tickets
-    model: zendesk_block
+    model: block_keboola_support
     explore: ticket
     type: single_value
     fields: [ticket.tickets_total]
@@ -236,7 +236,7 @@
     height: 2
   - title: NPS Score
     name: NPS Score
-    model: zendesk_block
+    model: block_keboola_support
     explore: ticket
     type: single_value
     fields: [ticket.good_evaluations_ratio]
@@ -281,7 +281,7 @@
     height: 3
   - title: SLA Compliance
     name: SLA Compliance
-    model: zendesk_block
+    model: block_keboola_support
     explore: ticket
     type: single_value
     fields: [ticket.tickets_sla_violations, ticket.tickets_total]
@@ -346,12 +346,12 @@
     subtitle_text: <font size="5px"><font color="#408ef7"><b>Company Status</b></font>
     body_text: ''
     row: 0
-    col: 7
-    width: 11
+    col: 6
+    width: 12
     height: 2
   - title: 'Top Users by # of Tickets'
     name: 'Top Users by # of Tickets'
-    model: zendesk_block
+    model: block_keboola_support
     explore: ticket
     type: looker_bar
     fields: [customer.customer, ticket.tickets_total]
@@ -417,7 +417,7 @@
     subtitle_text: <font size="5px"><font color="#408ef7"><b>Support Essentials</b></font>
     row: 0
     col: 0
-    width: 7
+    width: 6
     height: 2
   filters:
   - name: Company
@@ -426,7 +426,7 @@
     default_value: ''
     allow_multiple_values: true
     required: true
-    model: zendesk_block
+    model: block_keboola_support
     explore: company
     listens_to_filters: []
     field: company.company

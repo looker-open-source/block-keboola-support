@@ -43,7 +43,7 @@ label: "Block Keboola Support"
 
 include: "/views/**/*.view"
 include: "/explores/**/*.explore.lkml"
-#include: "*.dashboard.lookml"
+include: "*.dashboard.lookml"
 include: "//@{CONFIG_PROJECT_NAME}/views/**/*.view.lkml"
 include: "//@{CONFIG_PROJECT_NAME}/*.model.lkml"
 
