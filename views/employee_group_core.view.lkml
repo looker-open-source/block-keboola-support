@@ -1,5 +1,11 @@
+include: "//@{CONFIG_PROJECT_NAME}/views/employee_group.view"
+
 view: employee_group {
-  sql_table_name: "EMPLOYEE_GROUP" ;;
+  extends: [employee_group_config]
+}
+
+view: employee_group_core {
+  sql_table_name: @{SCHEMA_NAME}."EMPLOYEE_GROUP" ;;
 
   dimension: employee_group_id {
     type: string

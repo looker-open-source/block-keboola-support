@@ -1,5 +1,11 @@
+include: "//@{CONFIG_PROJECT_NAME}/views/company.view"
+
 view: company {
-  sql_table_name: "COMPANY" ;;
+  extends: [company_config]
+}
+
+view: company_core {
+  sql_table_name: @{SCHEMA_NAME}."COMPANY" ;;
   drill_fields: [company]
 
   dimension: company_id {

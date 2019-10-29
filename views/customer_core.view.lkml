@@ -1,5 +1,11 @@
+include: "//@{CONFIG_PROJECT_NAME}/views/customer.view"
+
 view: customer {
-  sql_table_name: "CUSTOMER" ;;
+  extends: [customer_config]
+}
+
+view: customer_core {
+  sql_table_name: @{SCHEMA_NAME}."CUSTOMER" ;;
   drill_fields: [customer_id]
 
   dimension: customer_id {

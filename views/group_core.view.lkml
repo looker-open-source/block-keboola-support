@@ -1,5 +1,11 @@
+include: "//@{CONFIG_PROJECT_NAME}/views/group.view"
+
 view: group {
-  sql_table_name: "GROUP" ;;
+  extends: [group_config]
+}
+
+view: group_core {
+  sql_table_name: @{SCHEMA_NAME}."GROUP" ;;
   drill_fields: [group_id]
 
   dimension: group_id {

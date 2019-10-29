@@ -1,5 +1,11 @@
+include: "//@{CONFIG_PROJECT_NAME}/views/ticket.view"
+
 view: ticket {
-  sql_table_name: "TICKET" ;;
+  extends: [ticket_config]
+}
+
+view: ticket_core {
+  sql_table_name: @{SCHEMA_NAME}."TICKET" ;;
   drill_fields: [ticket_list*]
 
   dimension: ticket_id {
