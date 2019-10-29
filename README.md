@@ -1,4 +1,4 @@
-# Support Essentials
+# Support Essentials by Keboola
 
 ## Keboola Blocks Intro (Scaffold Prerequisite)
 Looker Blocks powered by Keboola are designed to work in tandem with corresponding Keboola Scaffolds in the Keboola Connection platform. Similar to Blocks in nature, Keboola Scaffolds are templatized use-cases that can be instantly deployed into the Keboola platform, providing the whole data management and processing chain required to populate the Looker dashboards.
@@ -8,8 +8,8 @@ This Block connects to data from Keboola “Support - Looker” Scaffold into Lo
 
 ## Data and Block Structure
 The Block contains two LookML dashboards:
-Support Overview for insight into overall performance and trends, as well as tickets requiring immediate attention
-Company Detail for a closer look at a specific organization’s history
+*  Support Overview for insight into overall performance and trends, as well as tickets requiring immediate attention
+*  Company Detail for a closer look at a specific organization’s history
 
 The underlying model is simple and there is just one explore used - “tickets”.
 
