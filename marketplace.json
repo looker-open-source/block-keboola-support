@@ -1,5 +1,5 @@
 {
-  "label": "Support Essentials",
+  "label": "Customer Support Essentials by Keboola",
   "category_label": "Models",
   "branding": {
     "image_uri": "https://www.keboola.com/data/poweredByKeboola.png",
@@ -20,7 +20,7 @@
   },
   "models": [
     {
-      "name": "block-keboola-support",
+      "name": "block_keboola_support",
       "connection_constant": "CONNECTION"
     }
   ],
@@ -28,7 +28,7 @@
     {
       "git_uri": "",
       "git_ref": "",
-      "label": "Support Essentials Config",
+      "label": "Customer Support Essentials by Keboola Config",
       "constant_name": "CONFIG_PROJECT_NAME"
     }
   ]
