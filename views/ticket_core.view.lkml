@@ -13,7 +13,6 @@ view: ticket_core {
     primary_key: yes
     type: string
     sql: ${TABLE}."TICKET_ID" ;;
-    html: <a href=https://@{domain}/agent/tickets/{{ value }} target="_blank"><font color="blue">{{ value }}</font></a> ;;
   }
 
   dimension: channel {

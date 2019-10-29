@@ -17,11 +17,6 @@ constant: SCHEMA_NAME {
 
 # the manifest contains constants to be set according to your needs:
 
-# url of your Zendesk domain for ticket links
-constant: domain {
-  value: "keboola.zendesk.com"
-}
-
 # tickets with first response later than this will be flagged as SLA violations
 constant: sla_response_minutes {
   value: "600"
