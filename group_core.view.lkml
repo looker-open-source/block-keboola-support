@@ -1,4 +1,4 @@
-include: "//@{CONFIG_PROJECT_NAME}/views/group.view"
+include: "//@{CONFIG_PROJECT_NAME}/group.view"
 
 view: group {
   extends: [group_config]

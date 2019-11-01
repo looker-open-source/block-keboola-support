@@ -1,4 +1,4 @@
-include: "//@{CONFIG_PROJECT_NAME}/views/ticket_field.view"
+include: "//@{CONFIG_PROJECT_NAME}/ticket_field.view"
 
 view: ticket_field {
   extends: [ticket_field_config]
