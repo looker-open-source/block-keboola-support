@@ -3,7 +3,7 @@
   "category_label": "Models",
   "branding": {
     "image_uri": "https://www.keboola.com/data/poweredByKeboola.png",
-    "tagline": "Keboola’s Customer Support Essentials Block brings your customer data seamlessly into Looker to analyze your support system end-to-end, discover possibilities for better customer experiences and integration for your business needs."
+    "tagline": "Out-of-the-box analysis of support tickets for quick insights."
   },
 
   "constants": {
