@@ -13,7 +13,7 @@ constant: CONNECTION {
 }
 
 constant: SCHEMA_NAME {
-  value: "select"
+  value: "specify"
   export: override_required
 }
 
