@@ -27,7 +27,7 @@
   "auxiliary_projects": [
     {
       "git_uri": "git://github.com/llooker/block-keboola-support-config.git",
-      "git_ref": "8e07ff8cc299d6b8fcfc62f35d2f385a72480b49",
+      "git_ref": "eed23b585b0204036bb855c4f388e75f231c47f5",
       "label": "Customer Support Essentials by Keboola Config",
       "constant_name": "CONFIG_PROJECT_NAME"
     }
