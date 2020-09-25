@@ -13,7 +13,7 @@ constant: CONNECTION {
 }
 
 constant: SCHEMA_NAME {
-  value: "specify"
+  value: "WORKSPACE_545056555"
   export: override_required
 }
 

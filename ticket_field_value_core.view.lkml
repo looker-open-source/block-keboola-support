@@ -11,7 +11,7 @@ view: ticket_field_value_core {
     type: string
     primary_key: yes
     hidden: yes
-    sql:${ticket_id}||'_'||${ticket_field_id} ;;
+    sql: CONCAT(${ticket_id}, '_', ${ticket_field_id}) ;;
   }
 
   dimension: ticket_field {

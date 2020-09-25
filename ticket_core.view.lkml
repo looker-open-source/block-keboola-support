@@ -39,28 +39,37 @@ view: ticket_core {
     sql: ${TABLE}."CREATED_DATE" ;;
   }
 
-  dimension: days_open_dimension {
-    type: number
-    sql: datediff(day,${created_date},current_date()) ;;
+  dimension_group: since_open {
+    type: duration
+    intervals: [day, hour, minute]
+    sql_start: ${TABLE}."CREATED_DATE" ;;
+    sql_end: current_date ;;
+  }
+
+  dimension_group: since_update {
+    type: duration
+    intervals: [day, hour, minute]
+    sql_start: ${TABLE}."LAST_UPDATE" ;;
+    sql_end: current_date ;;
   }
 
   dimension: tickets_aging {
     case: {
       when: {
         label: "30 or more"
-        sql: ${days_open_dimension}>30 ;;
+        sql: ${days_since_open}>30 ;;
       }
       when: {
         label: "15 - 30"
-        sql: ${days_open_dimension}<=30 AND ${days_open_dimension} > 14 ;;
+        sql: ${days_since_open}<=30 AND ${days_since_open} > 14 ;;
       }
       when: {
         label: "8 - 14"
-        sql: ${days_open_dimension}<=14 AND ${days_open_dimension} > 7 ;;
+        sql: ${days_since_open}<=14 AND ${days_since_open} > 7 ;;
       }
       when: {
         label: "2 - 7"
-        sql: ${days_open_dimension}<=7 AND ${days_open_dimension} > 1 ;;
+        sql: ${days_since_open}<=7 AND ${days_since_open} > 1 ;;
       }
       else: "1 or less"
     }
@@ -155,7 +164,7 @@ view: ticket_core {
       }
       when: {
         label: "Response Violation"
-        sql: ${status} = 'new' AND timediff(minute,TO_TIME(${TABLE}."CREATED_DATE"),current_time()) > @{sla_response_minutes} ;;
+        sql: ${status} = 'new' AND ${minutes_since_open} > @{sla_response_minutes} ;;
       }
       when: {
         label: "Resolution Violation"
@@ -163,7 +172,7 @@ view: ticket_core {
       }
       when: {
         label: "Resolution Violation"
-        sql: ${status} NOT IN ('closed','solved','deleted') AND timediff(hour,TO_TIME(${TABLE}."CREATED_DATE"),current_time()) > @{sla_resolution_hours} ;;
+        sql: ${status} NOT IN ('closed','solved','deleted') AND ${hours_since_open} > @{sla_resolution_hours} ;;
       }
       else: "OK"
     }
@@ -175,7 +184,7 @@ view: ticket_core {
     case: {
       when: {
         label: "Stale"
-        sql: ${status} NOT IN ('closed','solved','deleted') AND timediff(hour,TO_TIME(${TABLE}."LAST_UPDATE"),current_time()) > @{stale_after_hours} ;;
+        sql: ${status} NOT IN ('closed','solved','deleted') AND ${hours_since_update} > @{stale_after_hours} ;;
       }
       when: {
         label: "Closed"

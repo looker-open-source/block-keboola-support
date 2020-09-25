@@ -11,7 +11,7 @@ view: employee_group_core {
     type: string
     label: "Employee Group ID"
     primary_key: yes
-    sql: ${employee_id}||'_'||${group_id} ;;
+    sql: CONCAT(${employee_id}, '_', ${group_id}) ;;
   }
 
   dimension: employee_id {
